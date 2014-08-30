@@ -38,7 +38,7 @@ boolean jumping = false;
 float vcy = 0;
 //Image Declaration
 PImage cuboydImage;
-
+PImage[] blockImages = new PImage[20];
 
 //Occurs once at beginning of game
 void setup() {
@@ -50,8 +50,12 @@ void setup() {
     blockDefs[i] = floor(random(3));
   }
 
-  cuboydImage = loadImage("cuboyd.png");
-
+  cuboydImage = loadImage("minecraft.png");
+  
+  for(int i = 1; i < 20; i++){
+    blockImages[i] = loadImage("block"+i+".png");
+  }
+  
   blockDefs[0] = 0;
   blockDefs[1] = 1;
   blockDefs[19] = 2;
@@ -118,7 +122,14 @@ void keyReleased() {
 //Occurs a bunch of times every second
 void draw() {
   background(200);
-
+  
+  
+  for(int i = 0; i < 100; i++){
+    for(int j = 0; j < 100; j++){
+      image(blockImages[floor(random(19))+1],i*ssize/100,j*ssize2/100, ssize/100, ssize/100);//, floor(random(800)),floor(random(800)),100,100);
+    }
+  }
+  
 
 
   //updating the game world
@@ -189,9 +200,8 @@ void draw() {
   for (int i = 0; i<20; i++) {
     for (int j = 0; j<15; j++) {
       if (blockDefs[blocks[i][j]] > 0) {
-        noStroke();
-        fill(255-(blocks[i][j]*10), 255, 255);
-        rect(i*bsize, j*bsize, bsize, bsize);
+        image(blockImages[blocks[i][j]],i*bsize, j*bsize, bsize, bsize);
+        
         if (blockDefs[blocks[i][j]] == 1) {
           noStroke();
           fill(255, 0, 0);
@@ -216,6 +226,11 @@ void draw() {
     rect(cx+9/float(32)*csize,cy+6/float(32)*csize,4/float(32)*csize,7/float(32)*csize);
     rect(cx+23/float(32)*csize,cy+6/float(32)*csize,4/float(32)*csize,7/float(32)*csize);
   }
+  
+  
+  
+  
+  text(round(frameRate),ssize-csize/3*2,csize/2);
 }
 
 
