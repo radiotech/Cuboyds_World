@@ -1,4 +1,4 @@
-
+/* @pjs preload="cuboyd.png"; */
 
 
 //Run in Fullscreen
@@ -8,17 +8,16 @@
 
 
 //Constant Variables
-int csize = 49; //Modifyable
+int csize = 50; //Modifyable
 int ssize = csize * 20; //Modifyable
 int ssize2 = csize * 15;
-//float scale = ssize/1000;
-float scale = 1;//(csize*20)/1000;
+float scale = ssize/float(1000);
+//float scale = //(csize*20)/1000;
 int bsize = csize;
-boolean cleft = false;
-boolean cright = false;
-boolean cleft2 = false;
-boolean cright2 = false;
-boolean cstill = true;
+boolean facing = false;
+
+float cspeed = .1;
+float squish = 0;
 
 
 //Varying Variables
@@ -33,9 +32,12 @@ float cy = ssize2-csize*2;
 //Cuboyd Velocity
 boolean pvcx = false;
 boolean nvcx = false;
+
+boolean jumping = false;
+
 float vcy = 0;
 //Image Declaration
-
+PImage cuboydImage;
 
 
 //Occurs once at beginning of game
@@ -47,12 +49,13 @@ void setup() {
   for  (int i = 0; i<20; i++) {
     blockDefs[i] = floor(random(3));
   }
-  
-  
+
+  cuboydImage = loadImage("cuboyd.png");
+
   blockDefs[0] = 0;
   blockDefs[1] = 1;
   blockDefs[19] = 2;
-  
+
 
   //Block Creation  
   for (int i = 0; i<20; i++) {
@@ -69,6 +72,7 @@ void setup() {
     blocks[0][i] = 1;
     blocks[19][i] = 1;
   }
+  blocks[1][13] = 0;
 }
 
 
@@ -76,50 +80,37 @@ void setup() {
 //Obtain user input
 void keyPressed() {
   if (keyCode == UP) {
-    if (blockDefs[blocks[floor(cx/csize)][round(cy/csize+.5)]]!=0) {
-      vcy = -20;
-    }
-    
-    
-    if(round(cx/csize)*csize != round(cx)){
-      if (blockDefs[blocks[floor(cx/csize)+1][round(cy/csize+.5)]]!=0) {
-        vcy = -20;
-      }
-    }
-    
-    cstill = false;
-    cright = true;
+    jumping = true;
   }
   if (keyCode == LEFT) {
     nvcx = true;
-    cleft = true;
-    cleft2 = false;
-    cstill = false;
+    facing = true;
   }
   if (keyCode == RIGHT) {
     pvcx = true;
-    cright = true;
-    cright2 = false;
-    cstill = false;
+    facing = false;
   }
-  if (key == 'R') {
-    
+  if (key == 'r') {
+    setup();
   }
 }
 
 //Obtain user input
 void keyReleased() {
+  if (keyCode == UP) {
+    jumping = false;
+  }
   if (keyCode == LEFT) {
     nvcx = false;
-    cleft = false;
-    cright2 = true;
-    cstill = false;
+    if (pvcx) {
+      facing = false;
+    }
   }
   if (keyCode == RIGHT) {
     pvcx = false;
-    cright = false;
-    cleft2 = true;
-    cstill = false;
+    if (nvcx) {
+      facing = true;
+    }
   }
 } 
 
@@ -128,17 +119,35 @@ void keyReleased() {
 void draw() {
   background(200);
 
+
+
   //updating the game world
 
-  vcy += 1;
+  vcy += .5;
 
   text(scale, csize*3, csize*3);
 
+
+  if (jumping) {
+    if (blockDefs[blocks[floor(cx/csize)][round(cy/csize+.5)]]!=0) {
+      vcy = -12;
+    }
+
+
+    if (round(cx/csize)*csize != round(cx)) {
+      if (blockDefs[blocks[floor(cx/csize)+1][round(cy/csize+.5)]]!=0) {
+        vcy = -12;
+      }
+    }
+  }
+
   if (pvcx) {
-    cx += 5*scale;
+    cx += csize*cspeed;
+    movementGrid();
   }
   if (nvcx) {
-    cx -= 5*scale;
+    cx -= csize*cspeed;
+    movementGrid();
   }
 
   cy += vcy*scale;
@@ -174,16 +183,6 @@ void draw() {
 
   collide(cx, cy);
 
-  //if(tempx > cx){rect(tempx-csize,tempy,csize,csize);}
-  //if(tempx < cx){rect(tempx+csize,tempy,csize,csize);}
-
-  //if(tempy > cy){rect(tempx,tempy-csize,csize,csize);}
-  //if(tempy < cy){rect(tempx,tempy+csize,csize,csize);}
-
-
-
-
-
   //Cuboyd Modifications
 
   //Drawing the world
@@ -191,27 +190,31 @@ void draw() {
     for (int j = 0; j<15; j++) {
       if (blockDefs[blocks[i][j]] > 0) {
         noStroke();
-        fill(255-(blocks[i][j]*10),255,255);
+        fill(255-(blocks[i][j]*10), 255, 255);
         rect(i*bsize, j*bsize, bsize, bsize);
         if (blockDefs[blocks[i][j]] == 1) {
           noStroke();
-          fill(255,0,0);
+          fill(255, 0, 0);
           rect(i*bsize+10, j*bsize+10, bsize-20, bsize-20);
-          
         }
       }
     }
   }
-  //Rectangle Version
-  stroke(0);
-  fill(157, 79, 0);
-  rect(cx, cy, csize, csize);
+  //Image Version
+  squish = (squish*3+(vcy*2))/4;
+  if (abs(squish)>csize/3) {
+    squish = (abs(squish)/squish) * (csize/3);
+  }
   
-  noFill();
-  stroke(0);
-  rect((floor(cx/csize))*csize,(round(cy/csize+.5))*csize,csize,csize);
-  if(round(cx/csize)*csize != round(cx)){
-    rect((floor(cx/csize)+1)*csize,(round(cy/csize+.5))*csize,csize,csize);
+  fill(255);
+  noStroke();
+  image(cuboydImage, cx+squish/2, cy-squish, csize-squish, csize+squish);
+  if(facing){
+    rect(cx+5/float(32)*csize,cy+6/float(32)*csize,4/float(32)*csize,7/float(32)*csize);
+    rect(cx+19/float(32)*csize,cy+6/float(32)*csize,4/float(32)*csize,7/float(32)*csize);
+  } else {
+    rect(cx+9/float(32)*csize,cy+6/float(32)*csize,4/float(32)*csize,7/float(32)*csize);
+    rect(cx+23/float(32)*csize,cy+6/float(32)*csize,4/float(32)*csize,7/float(32)*csize);
   }
 }
 
@@ -229,7 +232,7 @@ boolean collide(float oxpos, float oypos) {
       int tempxdis = abs(round(cx)-xpos*csize);
       int tempydis = abs(round(cy)-ypos*csize);
 
-      if (tempxdis > tempydis) {
+      if (tempxdis+5 > tempydis) {
         if (cx>xpos*csize) {
           cx = xpos*csize+csize;
         } else {
@@ -247,11 +250,15 @@ boolean collide(float oxpos, float oypos) {
   }
 
 
-  rect(xpos * csize, ypos * csize, csize, csize);
+  //rect(xpos * csize, ypos * csize, csize, csize);
 
 
 
   return true;
 }
 
+boolean movementGrid() {
+  cx = round(cx/(csize*cspeed))*(csize*cspeed);
+  return true;
+}
 

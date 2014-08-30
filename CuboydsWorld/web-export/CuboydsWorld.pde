@@ -40,8 +40,7 @@ float vcy = 0;
 
 //Occurs once at beginning of game
 void setup() {
-  //Screen Size
-  //size(ssize, ssize2);
+  size(ssize, ssize2); //this needs to be on the first line of setup
   //Loading Image Facing the Right
 
 
@@ -255,10 +254,5 @@ boolean collide(float oxpos, float oypos) {
   return true;
 }
 
-
-
-void draw() {
-  background(0,255,0);
-}
 
 
