@@ -2,9 +2,9 @@
 
 
 //Run in Fullscreen
-//boolean sketchFullScreen() {
-//  return true;
-//}
+boolean sketchFullScreen() {
+  return false;
+}
 
 
 //Constant Variables
