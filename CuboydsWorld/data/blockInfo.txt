@@ -1,0 +1,26 @@
+Format: Block_Editor_Tag,Block Name,Block_File_Name.png,Tag a,Tag b,Tag c,...
+Recognised Tags: Solid,End,Fast,Medium,Slow,Flow,LavaFlow,Kill,Climb,Swim,Bounce,Crumble,Fall,Jet,Up,Down,Left,Right,CannonTrigger,Cannon,Muddy,NoJump,Invisible,Weak,LevelSpecific
+
+W,Wall,wall.png,LevelSpecific,Solid
+S,Spike,spike.png,Weak,Kill
+WS,Wall Spike,wallSpike.png,Weak,Kill
+L,Lava,lava.png,Kill,Slow,Flow
+UP,Ladder,ladder.png,Weak,Climb
+H2,Water,water.png,Swim,Fast,Flow
+SL,Slime,slime.png,Bounce
+WW,Weak Wall,weakWall.png,Solid,Crumble
+SA,Sand,sand.png,Solid,Fall
+JU,Jet Up,jetUp.png,Weak,Jet,Up
+JD,Jet Down,jetDown.png,Weak,Jet,Down
+JR,Jet Right,jetRight.png,Weak,Jet,Right
+JL,Jet Left,jetLeft.png,Weak,Jet,Left
+T,Trigger,trigger.png,Weak,CannonTrigger
+CU,Cannon Up,cannonUp.png,Weak,Cannon,Up
+CD,Cannon Down,cannonDown.png,Weak,Cannon,Down
+CR,Cannon Right,cannonRight.png,Weak,Cannon,Right
+CL,Cannon Left,cannonLeft.png,Weak,Cannon,Left
+M,Mud,mud.png,Solid,Muddy,NoJump
+IW,Invisible Wall,invisibleWall.png,Invisible,Solid
+IS,Invisible Spike,invisibleSpike.png,Weak,Invisible,Kill
+IX,Invisible Wall Spike,invisibleWallSpike.png,Weak,Invisible,Kill
+D,Door,door.png,End
