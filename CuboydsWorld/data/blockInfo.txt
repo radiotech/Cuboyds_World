@@ -1,12 +1,12 @@
 Format: Block_Editor_Tag,Block Name,Block_File_Name.png,Tag a,Tag b,Tag c,...
-Recognised Tags: Solid,End,Fast,Medium,Slow,Flow,LavaFlow,Kill,Climb,Swim,Bounce,Crumble,Fall,Jet,Up,Down,Left,Right,CannonTrigger,Cannon,Muddy,NoJump,Invisible,Weak,LevelSpecific
-
+Recognised Tags: Up,Down,Left,Right,Fast,Medium,Slow,Solid,Flow,Kill,Climb,Swim,Bounce,Crumble,Fall,Jet,CannonTrigger,Cannon,Muddy,NoJump,Invisible,Weak,End,LevelSpecific
+Block render tags (Invisible) must be first if used: Modify some tags (Flow,Cannon,Jet) with modifiers (Fast,Medium,Slow,Up,Down,Left,Right)
 W,Wall,wall.png,LevelSpecific,Solid
 S,Spike,spike.png,Weak,Kill
 WS,Wall Spike,wallSpike.png,Weak,Kill
-L,Lava,lava.png,Kill,Slow,Flow
+L,Lava,lava.png,Kill,Slow,Flow,Weak
 UP,Ladder,ladder.png,Weak,Climb
-H2,Water,water.png,Swim,Fast,Flow
+H2,Water,water.png,Swim,Fast,Flow,Weak
 SL,Slime,slime.png,Bounce
 WW,Weak Wall,weakWall.png,Solid,Crumble
 SA,Sand,sand.png,Solid,Fall
@@ -21,6 +21,6 @@ CR,Cannon Right,cannonRight.png,Weak,Cannon,Right
 CL,Cannon Left,cannonLeft.png,Weak,Cannon,Left
 M,Mud,mud.png,Solid,Muddy,NoJump
 IW,Invisible Wall,invisibleWall.png,Invisible,Solid
-IS,Invisible Spike,invisibleSpike.png,Weak,Invisible,Kill
-IX,Invisible Wall Spike,invisibleWallSpike.png,Weak,Invisible,Kill
+IS,Invisible Spike,invisibleSpike.png,Invisible,Weak,Kill
+IX,Invisible Wall Spike,invisibleWallSpike.png,Invisible,Weak,Kill
 D,Door,door.png,End
