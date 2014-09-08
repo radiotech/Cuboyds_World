@@ -54,8 +54,3 @@ boolean collide(float oxpos, float oypos) {
   //rect(xpos * csize, ypos * csize, csize, csize);
   return true;
 }
-
-boolean movementGrid() {
-  cx = round(cx/(csize*cspeed))*(csize*cspeed);
-  return true;
-}

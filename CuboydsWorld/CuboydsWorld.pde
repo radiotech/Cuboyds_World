@@ -43,7 +43,10 @@ float cy = ssize2-csize*2;
 boolean pvcx = false;
 boolean nvcx = false;
 boolean jumping = false;
+float vcx = 0;
 float vcy = 0;
+float ocx = 0;
+float lastocx = 0;
 int lastUpdate = -1;
 int fps = 30;
 int fts = 11;
@@ -72,7 +75,7 @@ void draw() {
   
     blockUpdates();
     collisions();
-    touches(); 
+    touches();
     
     //Cuboyd Modifications
 
