@@ -1,6 +1,6 @@
 boolean move(){
   
-  vcy += gravity;
+  //vcy += gravity;
 
   if (jumping) {
     if (hasTag(blockAt(floor(cx/csize),round(cy/csize+.5)),"Solid")) {
@@ -14,15 +14,17 @@ boolean move(){
     }
   }
 
-  cy += vcy*scale;
-  cx += vcx*scale;
-
   if (pvcx) {
-    cx += csize*cspeed;
+    vcx += csize*cspeed;
   }
   if (nvcx) {
-    cx -= csize*cspeed;
+    vcx -= csize*cspeed;
   }
+  
+    //cy += vcy*scale;
+  //cx += vcx*scale;
+
+  moveTo(cx+vcx*scale,cy+vcy*scale);
   
   movementGrid();
   

@@ -37,20 +37,45 @@ boolean collide(float oxpos, float oypos) {
 
       if (tempxdis+5 > tempydis) {
         if (cx>xpos*csize) {
-          cx = xpos*csize+csize;
+          //cx = xpos*csize+csize;
         } else {
-          cx = xpos*csize-csize;
+          //cx = xpos*csize-csize;
         }
       } else {
         if (cy>ypos*csize) {
-          cy = ypos*csize+csize;
+          //cy = ypos*csize+csize;
         } else {
-          cy = ypos*csize-csize;
+          //cy = ypos*csize-csize;
         }
-        vcy = 0;
+        //vcy = 0;
       }
     }
   }
   //rect(xpos * csize, ypos * csize, csize, csize);
+  return true;
+}
+
+boolean moveTo( float stopX, float stopY){
+  
+  float startX = cx;
+  float startY = cy;
+  
+  cx = stopX;
+  cy = stopY;
+  
+  if(stopX-startX>0){
+    if(floor(startX/csize+1) != floor(stopX/csize+1)){
+      println("new Block");
+      if(hasTag(blockAt(floor(startX/csize+1),floor(startY/csize)),"Solid")){
+        println("Solid");
+        cx = floor(startX/csize+1)*csize;
+      }
+    }
+  } else if(stopX-startX<0){
+    
+  }
+  
+  
+  
   return true;
 }

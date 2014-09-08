@@ -11,7 +11,7 @@ SL,Slime,slime.png,Bounce
 WW,Weak Wall,weakWall.png,Solid,Crumble
 SA,Sand,sand.png,Solid,Fall
 JU,Jet Up,jetUp.png,Weak,Jet,Up
-JD,Jet Down,jetDown.png,Weak,Jet,Down
+JD,Jet Down,jetDown.png,Weak,Jet,Down,Flow,Medium
 JR,Jet Right,jetRight.png,Weak,Jet,Right
 JL,Jet Left,jetLeft.png,Weak,Jet,Left
 T,Trigger,trigger.png,Weak,CannonTrigger
