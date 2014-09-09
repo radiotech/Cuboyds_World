@@ -50,6 +50,9 @@ class Animation{
     } else if(type.equals("Fall")){
       //animations.add(new Animation("Fall", waitTime, originX, originY));
       setupFall( aTime, aOriginX, aOriginY);
+    } else if(type.equals("Mud")){
+      //animations.add(new Animation("Fall", waitTime, originX, originY));
+      setupMud( round(aTime), aOriginX, aOriginY);
     }
   }
   
@@ -72,6 +75,8 @@ class Animation{
       return updateFall();
     } else if(type.equals("Cannon")){
       return updateCannon();
+    } else if(type.equals("Mud")){
+      return updateMud();
     }
     return true;
   }
@@ -255,6 +260,11 @@ class Animation{
       fallV += gravity/2;
       fallY += fallV*scale;
       image(blockImage,originX*csize+fallV/2,originY*csize+fallY-fallV,csize-fallV,csize+fallV);
+      if(abs(cx - originX*csize)<csize){
+        if( abs((originY*csize+fallY+csize)-cy)<csize/2 ){
+          kill();
+        }
+      }
       if(hasTag(blockAt(originX,floor((originY*csize+fallY+csize+fallV+gravity/2)/csize)),"Weak")){
         setBlock(originX,floor((originY*csize+fallY+fallV+gravity/2)/csize),-1);
       } else {
@@ -397,6 +407,19 @@ class Animation{
       return false;
     }
     
+    if(abs(cx - (originX*csize+shiftX))<csize){
+      if(abs(cy - (originY*csize+shiftY))<csize){
+        if(dir == 0 || dir == 1){
+          if(abs(cx - (originX*csize+shiftX))<csize/2){
+            kill();
+          }
+        } else {
+          if(abs(cy - (originY*csize+shiftY))<csize/2){
+            kill();
+          }
+        }
+      }
+    }
     
     if(flipX){
       pushMatrix();
@@ -414,6 +437,90 @@ class Animation{
     
     return true;
   }
+  
+  
+  
+  void setupMud( int aDir, int aOriginX, int aOriginY){
+    
+    originX = aOriginX;
+    originY = aOriginY;
+    
+    dir = aDir;
+    
+    speed = 5;
+    shiftX = 0;
+    shiftY = 0;
+    blockImage = loadImage("animations/mudBall.png");
+    //blockType = blockAt(originX,originY);
+  }
+  
+  
+  
+  boolean updateMud(){
+    
+    if(onScreen(originX/csize+shiftX/csize,originY/csize+shiftY/csize)){
+          
+      /*
+      shiftY += speed;
+      if(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))) > -1){
+          if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Weak")){
+            blocks[ceil(originX+shiftX/float(csize))][round(originY+shiftY/float(csize))] = -1;
+            return false;
+          } else if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Bounce")){
+            dir = 2;
+            if(flipX){
+              flipX = false;
+            } else {
+              flipX = true;
+            }
+          } else if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Solid")){
+            disturb(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize)),0,0);
+            return false;
+          }
+      }
+        */  
+        
+        
+        shiftX += cspeed*csize*dir;
+        
+        fallV += gravity;
+        shiftY += fallV;
+        
+        if(blockAt(round((originX+shiftX)/float(csize)),round((originY+shiftY)/float(csize))) > -1){
+          if(hasTag(blockAt(round((originX+shiftX)/float(csize)),round((originY+shiftY)/float(csize))),"Weak")){
+            blocks[round((originX+shiftX)/float(csize))][round((originY+shiftY)/float(csize))] = index("HM");
+            return false;
+          } else if(hasTag(blockAt(round((originX+shiftX)/float(csize)),round((originY+shiftY)/float(csize))),"Bounce")){
+            dir = 2;
+            if(flipX){
+              flipX = false;
+            } else {
+              flipX = true;
+            }
+          } else if(hasTag(blockAt(round((originX+shiftX)/float(csize)),round((originY+shiftY)/float(csize))),"Solid")){
+            disturb(round((originX+shiftX)/float(csize)),round((originY+shiftY)/float(csize)),0,0);
+            return false;
+          }
+        }
+          
+          
+    } else {
+      return false;
+    }
+    
+    if(abs(cx - (originX+shiftX))<csize){
+      if(abs(cy - (originY+shiftY))<csize){
+        
+      }
+    }
+    
+    
+    image(blockImage,originX+shiftX,originY+shiftY,csize,csize);
+    
+    
+    return true;
+  }
+  
   
   
   

@@ -9,26 +9,27 @@ boolean blockUpdates(){
         
         if(hasTag(blocks[i][j],"Flow")){
           if(animationNotes[i][j].equals("Idle")){
-            if(hasTag(blocks[i][j],"Fast")){
-              flowSpeed = 15;
+            flowSpeed = round(pow(tagMod(blocks[i][j]),-1)*30);
+            if(hasTag(blocks[i][j],"Right")){
+              if(hasTag(blocks[min(i+1,19)][j],"Weak") && hasTag(blocks[min(i+1,19)][j],"Flow") == false){
+                animations.add(new Animation("Flow", flowSpeed, i, j, min(i+1,19), j));
+              }
             }
-            if(hasTag(blocks[i][j],"Medium")){
-              flowSpeed = 30;
+            if(hasTag(blocks[i][j],"Left")){
+              if(hasTag(blocks[max(i-1,0)][j],"Weak") && hasTag(blocks[max(i-1,0)][j],"Flow") == false){
+                animations.add(new Animation("Flow", flowSpeed, i, j, max(i-1,0), j));
+              }
             }
-            if(hasTag(blocks[i][j],"Slow")){
-              flowSpeed = 60;
+            if(hasTag(blocks[i][j],"Down")){
+              if(hasTag(blocks[i][min(j+1,14)],"Weak") && hasTag(blocks[i][min(j+1,14)],"Flow") == false){
+                animations.add(new Animation("Flow", flowSpeed/2, i, j, i, min(j+1,14)));
+              }
             }
-            
-            if(hasTag(blocks[min(i+1,19)][j],"Weak") && hasTag(blocks[min(i+1,19)][j],"Flow") == false){
-              animations.add(new Animation("Flow", flowSpeed, i, j, min(i+1,19), j));
+            if(hasTag(blocks[i][j],"Up")){
+              if(hasTag(blocks[i][max(j-1,0)],"Weak") && hasTag(blocks[i][max(j-1,0)],"Flow") == false){
+                animations.add(new Animation("Flow", flowSpeed, i, j, i, max(j-1,0)));
+              }
             }
-            if(hasTag(blocks[max(i-1,0)][j],"Weak") && hasTag(blocks[max(i-1,0)][j],"Flow") == false){
-              animations.add(new Animation("Flow", flowSpeed, i, j, max(i-1,0), j));
-            }
-            if(hasTag(blocks[i][min(j+1,14)],"Weak") && hasTag(blocks[i][min(j+1,14)],"Flow") == false){
-              animations.add(new Animation("Flow", flowSpeed/2, i, j, i, min(j+1,14)));
-            }
-          
           }
         }
         

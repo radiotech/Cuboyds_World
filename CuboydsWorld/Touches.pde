@@ -54,7 +54,7 @@ boolean touches(){
   }
   
   if (hasTag(tba,tbb,tbc,tbd,"Kill")) {
-    reload();
+    kill();
   }
   
   if (hasTag(tba,tbb,tbc,tbd,"CannonTrigger")) {

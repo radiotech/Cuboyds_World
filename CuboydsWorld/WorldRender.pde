@@ -8,6 +8,7 @@ boolean renderWorld(){
         
         if("Invisible".equals(blockTags[blocks[i][j]][0])){
           
+          
           tint(255, min(csize-(abs(i*csize-cx)-csize),csize-(abs(j*csize-cy)-csize))/csize*255);
           image(blockImages[blocks[i][j]],i*bsize, j*bsize, bsize, bsize);
           tint(255,255);
@@ -42,6 +43,9 @@ boolean renderWorld(){
   } else {
     rect(cx+csize/2-8/float(32)*(csize-squish),cy+csize-24/float(32)*(csize+squish),4/float(32)*(csize-squish),7/float(32)*(csize+squish));
     rect(cx+csize/2+8/float(32)*(csize-squish),cy+csize-24/float(32)*(csize+squish),4/float(32)*(csize-squish),7/float(32)*(csize+squish));
+  }
+  if(muddy){
+    image(muddyImage, cx+squish/2, cy-squish, csize-squish, csize+squish);
   }
   
   

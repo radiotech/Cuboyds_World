@@ -70,12 +70,18 @@ boolean moveTo( float stopX, float stopY){
     if(ceil(startX/csize) != ceil(stopX/csize)){
       if(hasTag(blockAt(ceil(startX/csize)+1,floor(startY/csize)),"Solid") || hasTag(blockAt(ceil(startX/csize)+1,ceil(startY/csize)),"Solid")){
         cx = (ceil(startX/csize))*csize;
+        if(hasTag(blockAt(ceil(startX/csize)+1,floor(startY/csize)),"Muddy") || hasTag(blockAt(ceil(startX/csize)+1,ceil(startY/csize)),"Muddy")){
+          muddy = true;
+        }
       }
     }
   } else if(stopX-startX<0){
     if(floor(startX/csize) != floor(stopX/csize)){
       if(hasTag(blockAt(floor(startX/csize)-1,floor(startY/csize)),"Solid") || hasTag(blockAt(floor(startX/csize)-1,ceil(startY/csize)),"Solid")){
         cx = (floor(startX/csize))*csize;
+        if(hasTag(blockAt(floor(startX/csize)-1,floor(startY/csize)),"Muddy") || hasTag(blockAt(floor(startX/csize)-1,ceil(startY/csize)),"Muddy")){
+          muddy = true;
+        }
       }
     }
   }
@@ -84,7 +90,36 @@ boolean moveTo( float stopX, float stopY){
     if(ceil(startY/csize) != ceil(stopY/csize)){
       if(hasTag(blockAt(floor(cx/csize),ceil(movementGrid(startY)/csize)+1),"Solid") || hasTag(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1),"Solid")){
         cy = (ceil(startY/csize))*csize;
-        vcy = 0;
+        
+        if(hasTag(blockAt(floor(cx/csize),ceil(movementGrid(startY)/csize)+1),"Muddy") || hasTag(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1),"Muddy")){
+          muddy = true;
+          noJump = true;
+        }
+        if(hasTag(blockAt(floor(cx/csize),ceil(movementGrid(startY)/csize)+1),"Bounce") || hasTag(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1),"Bounce")){
+          if(hasTag(blockAt(floor(cx/csize),ceil(movementGrid(startY)/csize)+1),"Weak")){
+            if(jumping){
+              vcy = -vcy-round(tagMod(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1))*3);
+            } else {
+              vcy = -vcy+round(tagMod(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1))*3);
+            }
+          } else if(hasTag(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1),"Weak")){
+            if(jumping){
+              vcy = -vcy-round(tagMod(blockAt(floor(cx/csize),ceil(movementGrid(startY)/csize)+1))*3);
+            } else {
+              vcy = -vcy+round(tagMod(blockAt(floor(cx/csize),ceil(movementGrid(startY)/csize)+1))*3);
+            }
+          } else if(hasTag(blockAt(floor(cx/csize),ceil(movementGrid(startY)/csize)+1),"Bounce") && hasTag(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1),"Bounce")){
+            if(jumping){
+              vcy = -vcy-round(tagMod(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1))*3);
+            } else {
+              vcy = -vcy+round(tagMod(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1))*3);
+            }
+          } else {
+            vcy = 0;
+          }
+        } else {
+          vcy = 0;
+        }
       }
     }
   } else if(stopY-startY<0){
@@ -92,6 +127,9 @@ boolean moveTo( float stopX, float stopY){
       if(hasTag(blockAt(floor(cx/csize),floor(movementGrid(startY)/csize)-1),"Solid") || hasTag(blockAt(ceil(cx/csize),floor(movementGrid(startY)/csize)-1),"Solid")){
         cy = (floor(startY/csize))*csize;
         vcy = 0;
+        if(hasTag(blockAt(floor(cx/csize),floor(movementGrid(startY)/csize)-1),"Muddy") || hasTag(blockAt(ceil(cx/csize),floor(movementGrid(startY)/csize)-1),"Muddy")){
+          muddy = true;
+        }
       }
     }
   }

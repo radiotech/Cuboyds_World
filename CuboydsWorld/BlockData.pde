@@ -49,6 +49,26 @@ boolean hasTag(int tempBlocka, int tempBlockb, int tempBlockc, int tempBlockd, S
   return false;
 }
 
+int hasTags(int tempBlock, String tempStr){
+  int myreturn = 0;
+  if(tempBlock >= 0){
+    for(int i = 0; i < 10; i++){
+      if(tempStr.equals(blockTags[tempBlock][i])){
+        myreturn ++;
+      }
+    }
+  }
+  return myreturn;
+}
+
+float tagMod(int tempBlock){
+  float myreturn = 1;
+  myreturn *= pow(2,hasTags(tempBlock,"*2"));
+  myreturn *= pow(1.5,hasTags(tempBlock,"*1.5"));
+  myreturn *= pow(.5,hasTags(tempBlock,"*.5"));
+  return myreturn;
+}
+
 int blockAt(float oxpos, float oypos) {
   int xpos = round(oxpos/csize);
   int ypos = round(oypos/csize);
@@ -86,11 +106,11 @@ boolean disturb(int oxpos, int oypos, int radius, int wait){
   if(onScreen(oxpos, oypos)){
     if(animationNotes[oxpos][oypos].equals("Idle") && wait <= 0){
       if(hasTag(blocks[oxpos][oypos],"Fall")) {
-        animations.add(new Animation("Fall", 50, oxpos, oypos));
+        animations.add(new Animation("Fall", round(tagMod(blockAt(oxpos,oypos))*50), oxpos, oypos));
         
       }
       if (hasTag(blocks[oxpos][oypos],"Crumble")) {
-        animations.add(new Animation("Crumble", 50, oxpos, oypos));
+        animations.add(new Animation("Crumble", round(tagMod(blockAt(oxpos,oypos))*50), oxpos, oypos));
         
       }
     }

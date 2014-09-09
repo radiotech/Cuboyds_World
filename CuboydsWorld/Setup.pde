@@ -1,7 +1,53 @@
 boolean reload(){
-
+  
+  
+  
+  csize = 50; //Modifyable
+  ssize = csize * 20; //Modifyable
+  ssize2 = csize * 15;
+  scale = ssize/float(1000);
+  bsize = csize;
+  facing = false;
+  level = 1;
+  room = 1;
+  
+  //Animation[] animation = new Animation[0];
+  animations = new ArrayList<Animation>();
+  
+  cspeed = 1/float(8);
+  squish = 0;
+  
+  
+  //Varying Variables
+  blocks = new int[20][15];
+  animationNotes = new String[20][15];
+  
+  //Cuboyd Posistion
   cx = ssize/10-csize;
   cy = ssize2-csize*2;
+  lastX = cx;
+  lastY = cy;
+  sling = 0;
+  
+  //Cuboyd Velocity
+  pvcx = false;
+  nvcx = false;
+  jumping = false;
+  muddy = false;
+  noJump = false;
+  //float vcx = 0;
+  vcy = 0;
+  lastUpdate = -1;
+  fps = 30;
+  fts = 11;
+  dead = false;
+  
+  cannonTrigger = 1;
+  
+  gravity = 1.5;
+  
+  
+  
   
   loadBlocks();
   loadLevel();
@@ -18,6 +64,7 @@ boolean reload(){
   
 
   cuboydImage = loadImage("cuboyd.png");
+  muddyImage = loadImage("muddy.png");
   
   //Block Creation  
   for (int i = 0; i<20; i++) {
@@ -100,4 +147,8 @@ boolean loadLevel(){
   }
   
   return true;
+}
+
+void kill(){
+  dead = true;
 }

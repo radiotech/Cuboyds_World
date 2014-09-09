@@ -1,11 +1,9 @@
 /* @pjs preload="cuboyd.png"; */
 
-
 //Run in Fullscreen
 //boolean sketchFullScreen() {
 //  return true;
 //}
-
 
 //Constant Variables
 int csize = 50; //Modifyable
@@ -33,31 +31,37 @@ PImage[] blockImages;
 String[][] blockTags;
 
 //Varying Variables
-int[][] blocks = new int[20][15];
-String[][] animationNotes = new String[20][15];
+int[][] blocks;
+String[][] animationNotes;
 
 //Cuboyd Posistion
-float cx = ssize/10-csize;
-float cy = ssize2-csize*2;
-float lastX = cx;
-float lastY = cy;
+float cx;
+float cy;
+float lastX;
+float lastY;
+
+int sling;
 
 //Cuboyd Velocity
-boolean pvcx = false;
-boolean nvcx = false;
-boolean jumping = false;
-//float vcx = 0;
-float vcy = 0;
-int lastUpdate = -1;
-int fps = 30;
-int fts = 11;
+boolean pvcx;
+boolean nvcx;
+boolean jumping;
+boolean muddy;
+boolean noJump;
 
-int cannonTrigger = 1;
+float vcy;
+int lastUpdate;
+int fps;
+int fts;
+boolean dead;
 
-float gravity = 1.5;
+int cannonTrigger;
+
+float gravity;
 
 //Image Declaration
 PImage cuboydImage;
+PImage muddyImage;
 
 
 
@@ -73,6 +77,10 @@ void draw() {
   //updating the game world
   
   if(lastUpdate != millis()/(1000/30) % 30){
+    
+    if(dead){
+      reload();
+    }
     
     move();
   
