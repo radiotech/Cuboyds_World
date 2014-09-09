@@ -7,11 +7,11 @@ WS,Wall Spike,wallSpike.png,Weak,Kill
 L,Lava,lava.png,Kill,Slow,Flow,Weak
 UP,Ladder,ladder.png,Weak,Climb
 H2,Water,water.png,Swim,Fast,Flow,Weak
-SL,Slime,slime.png,Bounce
+SL,Slime,slime.png,Bounce,Solid
 WW,Weak Wall,weakWall.png,Solid,Crumble
 SA,Sand,sand.png,Solid,Fall
 JU,Jet Up,jetUp.png,Weak,Jet,Up
-JD,Jet Down,jetDown.png,Weak,Jet,Down,Flow,Medium
+JD,Jet Down,jetDown.png,Weak,Jet,Down
 JR,Jet Right,jetRight.png,Weak,Jet,Right
 JL,Jet Left,jetLeft.png,Weak,Jet,Left
 T,Trigger,trigger.png,Weak,CannonTrigger

@@ -42,6 +42,7 @@ boolean loadBlocks(){
   loadData = loadStrings("blockInfo.txt");
   blockDefs = new String[loadData.length-3];
   blockName = new String[loadData.length-3];
+  blockFileName = new String[loadData.length-3];
   blockFile = new String[loadData.length-3];
   blockImages = new PImage[loadData.length-3];
   blockTags = new String[loadData.length-3][10];
@@ -55,6 +56,7 @@ boolean loadBlocks(){
     
     blockDefs[i-3] = splitData[0];
     blockName[i-3] = splitData[1];
+    blockFileName[i-3] = splitData[2];
     if(hasTag(i-3,"LevelSpecific")){
       blockImages[i-3] = loadImage("level"+level+"/blocks/"+splitData[2]);
     } else {

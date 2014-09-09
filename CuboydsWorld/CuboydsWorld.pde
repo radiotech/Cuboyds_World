@@ -27,6 +27,7 @@ String[] loadData;
 String[] splitData;
 String[] blockDefs;
 String[] blockName;
+String[] blockFileName;
 String[] blockFile;
 PImage[] blockImages;
 String[][] blockTags;
@@ -38,18 +39,20 @@ String[][] animationNotes = new String[20][15];
 //Cuboyd Posistion
 float cx = ssize/10-csize;
 float cy = ssize2-csize*2;
+float lastX = cx;
+float lastY = cy;
 
 //Cuboyd Velocity
 boolean pvcx = false;
 boolean nvcx = false;
 boolean jumping = false;
-float vcx = 0;
+//float vcx = 0;
 float vcy = 0;
-float ocx = 0;
-float lastocx = 0;
 int lastUpdate = -1;
 int fps = 30;
 int fts = 11;
+
+int cannonTrigger = 1;
 
 float gravity = 1.5;
 

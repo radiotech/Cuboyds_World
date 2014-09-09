@@ -57,25 +57,47 @@ boolean collide(float oxpos, float oypos) {
 
 boolean moveTo( float stopX, float stopY){
   
-  float startX = cx;
-  float startY = cy;
+  float startX = lastX;
+  float startY = lastY;
   
-  cx = stopX;
-  cy = stopY;
+  stopX = cx;
+  stopY = cy;
+  
+  
+  //println("hi");
   
   if(stopX-startX>0){
-    if(floor(startX/csize+1) != floor(stopX/csize+1)){
-      println("new Block");
-      if(hasTag(blockAt(floor(startX/csize+1),floor(startY/csize)),"Solid")){
-        println("Solid");
-        cx = floor(startX/csize+1)*csize;
+    if(ceil(startX/csize) != ceil(stopX/csize)){
+      if(hasTag(blockAt(ceil(startX/csize)+1,floor(startY/csize)),"Solid") || hasTag(blockAt(ceil(startX/csize)+1,ceil(startY/csize)),"Solid")){
+        cx = (ceil(startX/csize))*csize;
       }
     }
   } else if(stopX-startX<0){
-    
+    if(floor(startX/csize) != floor(stopX/csize)){
+      if(hasTag(blockAt(floor(startX/csize)-1,floor(startY/csize)),"Solid") || hasTag(blockAt(floor(startX/csize)-1,ceil(startY/csize)),"Solid")){
+        cx = (floor(startX/csize))*csize;
+      }
+    }
   }
   
+  if(stopY-startY>0){
+    if(ceil(startY/csize) != ceil(stopY/csize)){
+      if(hasTag(blockAt(floor(cx/csize),ceil(movementGrid(startY)/csize)+1),"Solid") || hasTag(blockAt(ceil(cx/csize),ceil(movementGrid(startY)/csize)+1),"Solid")){
+        cy = (ceil(startY/csize))*csize;
+        vcy = 0;
+      }
+    }
+  } else if(stopY-startY<0){
+    if(floor(startY/csize) != floor(stopY/csize)){
+      if(hasTag(blockAt(floor(cx/csize),floor(movementGrid(startY)/csize)-1),"Solid") || hasTag(blockAt(ceil(cx/csize),floor(movementGrid(startY)/csize)-1),"Solid")){
+        cy = (floor(startY/csize))*csize;
+        vcy = 0;
+      }
+    }
+  }
   
+  lastX = cx;
+  lastY = cy;
   
   return true;
 }

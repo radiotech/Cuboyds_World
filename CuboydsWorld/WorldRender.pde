@@ -47,7 +47,7 @@ boolean renderWorld(){
   
   
   
-  text(fps+" Steps/Second"+vcx,ssize-csize*10,csize/2);
+  text(fps+" Steps/Second",ssize-csize*10,csize/2);
   text(round(frameRate)+" FPS",ssize-csize,csize/2);
   text(animations.size()+" Animations",ssize-csize*4,csize/2);
   

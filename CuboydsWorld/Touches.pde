@@ -57,6 +57,15 @@ boolean touches(){
     reload();
   }
   
+  if (hasTag(tba,tbb,tbc,tbd,"CannonTrigger")) {
+    if(cannonTrigger > 2){
+      cannonTrigger = 0;
+    } else {
+      cannonTrigger = 1;
+    }
+  }
+  
+  
   if (hasTag(tba,tbb,tbc,tbd,"End")) {
     reload();
   }

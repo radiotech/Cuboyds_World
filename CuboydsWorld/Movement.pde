@@ -1,9 +1,11 @@
 boolean move(){
   
-  //vcy += gravity;
+  vcy += gravity;
 
   if (jumping) {
     if (hasTag(blockAt(floor(cx/csize),round(cy/csize+.5)),"Solid")) {
+      vcy = -20;
+    } else if(cy>13*csize) {
       vcy = -20;
     }
 
@@ -15,18 +17,19 @@ boolean move(){
   }
 
   if (pvcx) {
-    vcx += csize*cspeed;
+    cx += csize*cspeed;
   }
   if (nvcx) {
-    vcx -= csize*cspeed;
+    cx -= csize*cspeed;
   }
   
-    //cy += vcy*scale;
-  //cx += vcx*scale;
-
-  moveTo(cx+vcx*scale,cy+vcy*scale);
+  cy += vcy*scale;
   
-  movementGrid();
+  if(lastX != cx || lastY != cy){
+    moveTo(cx,cy);
+  }
+  
+  //movementGrid();
   
   if (cy > ssize2-csize) {
     cy = ssize2-csize;
@@ -38,13 +41,6 @@ boolean move(){
   return true;
 }
 
-boolean movementGrid() {
-  float tempcx = round((cx+ocx)/(csize*cspeed))*(csize*cspeed);
-  ocx = (cx+ocx) - (tempcx);
-  cx = tempcx;
-  if(ocx == lastocx){
-    ocx = 0;
-  }
-  lastocx = ocx;
-  return true;
+float movementGrid(float tempX) {
+  return round(tempX/(csize*cspeed))*(csize*cspeed);
 }
