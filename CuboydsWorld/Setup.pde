@@ -74,6 +74,11 @@ boolean loadLevel(){
   //blockDefs[0] = "W";
   //blockDefs[1] = "D";
   
+  loadData = loadStrings("LEVEL_AND_ROOM.txt");
+  splitData = split(loadData[0],',');
+  level = int(splitData[0]);
+  room = int(splitData[1]);
+  
   loadData = loadStrings("level"+level+"/room"+room+".txt");
   
   String tempStr;
@@ -81,7 +86,7 @@ boolean loadLevel(){
   
   for (int i = 0; i < 15; i++) {
     
-    splitData = split(loadData[i],',');
+    splitData = split(loadData[i],','); //KYLE! - THIS MEANS THAT THE ROOM FILE WAS NOT FOUND- CHECK THAT THE FILE "data/level#/room#.txt" EXISTS BASED ON WHAT YOU ENTERED IN "LEVEL_AND_ROOM.txt"! GOOD LUCK!
     
     for (int j = 0; j < 20; j++) {
       
