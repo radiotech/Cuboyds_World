@@ -21,6 +21,9 @@ void keyPressed() {
     if (key == 'r') {
       reload();
     }
+    if (key == 'C') {
+      clearRoom();
+    }
     if (key == 'b') {
       if(blockSelection){
         blockSelection = false;
@@ -28,6 +31,14 @@ void keyPressed() {
         blockSelection = true;
       }
     }
+    if (key == 'i') {
+      if(showInvisible){
+        showInvisible = false;
+      } else {
+        showInvisible = true;
+      }
+    }
+    
   } else {
     if (key == 'k') {
       kill();

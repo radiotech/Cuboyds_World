@@ -27,8 +27,9 @@ float cspeed = 1/float(8);
 float squish = 0;
 boolean editor;
 boolean blockSelection;
-int selectedBlock;
-int selectedBlock2;
+int selectedBlock = 0;
+int selectedBlock2 = -1;
+boolean showInvisible;
 
 
 

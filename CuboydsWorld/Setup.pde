@@ -13,8 +13,7 @@ boolean reload(){
   
   blockSelection = false;
   editor = true;
-  selectedBlock = 0;
-  selectedBlock2 = -1;
+  showInvisible = false;
   
   //Animation[] animation = new Animation[0];
   animations = new ArrayList<Animation>();

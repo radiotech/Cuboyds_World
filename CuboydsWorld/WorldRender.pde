@@ -13,6 +13,12 @@ boolean renderWorld(){
           image(blockImages[blocks[i][j]],i*bsize, j*bsize, bsize, bsize);
           tint(255,255);
           
+          if(editor){
+            if(showInvisible){
+              image(blockImages[blocks[i][j]],i*bsize, j*bsize, bsize, bsize);
+            }
+          }
+          
         } else {
           image(blockImages[blocks[i][j]],i*bsize, j*bsize, bsize, bsize);
         }

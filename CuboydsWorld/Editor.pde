@@ -72,3 +72,19 @@ void saveBlocks(){
   }
   saveStrings("data/world"+world+"/level"+level+".txt",loadData);
 }
+
+void clearRoom(){
+  for(int i = 0; i < 20; i++){
+    for(int j = 0; j < 20; j++){
+      if(i > 0 && i < 19 && j > 0 && j < 14){
+        setBlock(i,j,-1,true);
+      } else {
+        setBlock(i,j,0,true);
+      }
+    }
+  }
+  setBlock(19,1,index("D"),true);
+  setBlock(19,2,index("D"),true);
+  saveBlocks();
+  reload();
+}
