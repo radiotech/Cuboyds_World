@@ -28,12 +28,6 @@ boolean renderWorld(){
     }
   }
   
-  //Image Version
-  squish = (squish*3+(vcy))/4;
-  if (abs(squish)>csize/3) {
-    squish = (abs(squish)/squish) * (csize/3);
-  }
-  
   fill(255);
   noStroke();
   image(cuboydImage, cx+squish/2, cy-squish, csize-squish, csize+squish);
@@ -48,12 +42,21 @@ boolean renderWorld(){
     image(muddyImage, cx+squish/2, cy-squish, csize-squish, csize+squish);
   }
   
+  if(editor){
+    if(blockSelection){
+      selectBlock();
+    }
+    
+    fill(255);
+    textAlign(LEFT,CENTER);
+    textSize(12);
+    text(fps+" Steps/Second",ssize-csize*10,csize/2);
+    text(round(frameRate)+" FPS",ssize-csize,csize/2);
+    text(animations.size()+" Animations",ssize-csize*4,csize/2);
+  }
   
   
   
-  text(fps+" Steps/Second",ssize-csize*10,csize/2);
-  text(round(frameRate)+" FPS",ssize-csize,csize/2);
-  text(animations.size()+" Animations",ssize-csize*4,csize/2);
   
   return true;
 }

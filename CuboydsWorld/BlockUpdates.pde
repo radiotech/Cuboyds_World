@@ -111,6 +111,19 @@ boolean blockUpdates(){
         }
         
         
+        if("L".equals(index(blocks[i][j]))){
+          if("H2".equals(index(blockAt(i+1,j))) || "H2".equals(index(blockAt(i-1,j))) || "H2".equals(index(blockAt(i,j+1))) || "H2".equals(index(blockAt(i,j-1)))){
+            blocks[i][j] = index("WW");
+          }
+        }
+        
+        if("HM".equals(index(blocks[i][j]))){
+          if(hasTag(blockAt(i,j+1),"Weak") == false){
+            blocks[i][j] = index("M");
+          }
+        }
+        
+        
       }
     }
   }

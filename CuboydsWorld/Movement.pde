@@ -79,6 +79,12 @@ boolean move(){
     }
   }
   
+  //Image Version
+  squish = (squish*3+(vcy))/4;
+  if (abs(squish)>csize/3) {
+    squish = (abs(squish)/squish) * (csize/3);
+  }
+  
   return true;
 }
 

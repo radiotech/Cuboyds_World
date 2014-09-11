@@ -1,5 +1,5 @@
 String index(int valueInt){
-  if(blockDefs.length > valueInt){
+  if(blockDefs.length > valueInt && valueInt > -1){
     return blockDefs[valueInt];
   } else {
     return "-1";
@@ -95,6 +95,16 @@ int blockAt(int oxpos, int oypos) {
 boolean setBlock(int oxpos, int oypos, int blockVal) {
   if (oxpos >= 0 && oxpos <= 19 && oypos >= 0 && oypos <= 14) {
     blocks[oxpos][oypos] = blockVal;
+  } else {
+    return false;
+  }
+  return true;
+}
+
+boolean setBlock(int oxpos, int oypos, int blockVal, boolean saveable) {
+  if (oxpos >= 0 && oxpos <= 19 && oypos >= 0 && oypos <= 14) {
+    blocks[oxpos][oypos] = blockVal;
+    saveBlocks[oxpos][oypos] = blockVal;
   } else {
     return false;
   }

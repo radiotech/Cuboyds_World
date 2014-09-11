@@ -10,8 +10,28 @@ void keyPressed() {
     pvcx = true;
     facing = false;
   }
-  if (key == 'r') {
-    reload();
+  if (key == ' ') {
+    if(paused){
+      paused = false;
+    } else {
+      paused = true;
+    }
+  }
+  if(editor){
+    if (key == 'r') {
+      reload();
+    }
+    if (key == 'b') {
+      if(blockSelection){
+        blockSelection = false;
+      } else {
+        blockSelection = true;
+      }
+    }
+  } else {
+    if (key == 'k') {
+      kill();
+    }
   }
 }
 
@@ -33,3 +53,14 @@ void keyReleased() {
     }
   }
 } 
+
+void mouseReleased(){
+  if(editor){
+    if(blockSelection == false){
+      saveBlocks();
+    } else {
+      blockSelectClick();
+    }
+  }
+}
+  

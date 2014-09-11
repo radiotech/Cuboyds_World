@@ -138,12 +138,16 @@ class Animation{
       } else {
         if(forward){
           if(hasTag(blocks[destinationX][destinationY],"Weak") && !hasTag(blocks[destinationX][destinationY],"Flow")){
-            fade++;
+            if(paused == false){
+              fade++;
+            }
           } else {
             forward = false;
           }
         } else {
-          fade -= 1;
+          if(paused == false){
+            fade -= 1;
+          }
         }
       }
       if(blocks[originX][originY] != blockType){
@@ -155,7 +159,9 @@ class Animation{
         animationNotes[originX][originY] = "Idle";
         return false;
       }
-      fade++;
+      if(paused == false){
+        fade++;
+      }
     }
     return true;
   }
@@ -185,31 +191,33 @@ class Animation{
   
   
   boolean updateCrumble(){
-    for(int i = 0; i < 10; i++){
-      if(cracking[i][0] > -1){
-        clearImageSpot(blockImage,cracking[i][1],cracking[i][2]);
-        if(cracking[i][0] == 0){
-          cracking[i][2] += 1;
-          cracking[i][1] += choose(1,-1);
-        }
-        if(cracking[i][0] == 1){
-          cracking[i][2] -= 1;
-          cracking[i][1] += choose(1,-1);
-        }
-        if(cracking[i][0] == 2){
-          cracking[i][1] += 1;
-          cracking[i][2] += choose(1,-1);
-        }
-        if(cracking[i][0] == 3){
-          cracking[i][1] -= 1;
-          cracking[i][2] += choose(1,-1);
-        }
-        if(random(100)<8){
-          if(cracks<cracking.length){
-            cracking[cracks][0] = floor(random(4));
-            cracking[cracks][1] = cracking[i][1];
-            cracking[cracks][2] = cracking[i][2];
-            cracks++;
+    if(paused == false){
+      for(int i = 0; i < 10; i++){
+        if(cracking[i][0] > -1){
+          clearImageSpot(blockImage,cracking[i][1],cracking[i][2]);
+          if(cracking[i][0] == 0){
+            cracking[i][2] += 1;
+            cracking[i][1] += choose(1,-1);
+          }
+          if(cracking[i][0] == 1){
+            cracking[i][2] -= 1;
+            cracking[i][1] += choose(1,-1);
+          }
+          if(cracking[i][0] == 2){
+            cracking[i][1] += 1;
+            cracking[i][2] += choose(1,-1);
+          }
+          if(cracking[i][0] == 3){
+            cracking[i][1] -= 1;
+            cracking[i][2] += choose(1,-1);
+          }
+          if(random(100)<8){
+            if(cracks<cracking.length){
+              cracking[cracks][0] = floor(random(4));
+              cracking[cracks][1] = cracking[i][1];
+              cracking[cracks][2] = cracking[i][2];
+              cracks++;
+            }
           }
         }
       }
@@ -232,7 +240,9 @@ class Animation{
     if(fade >= time){
       return false;
     } else {
-      fade += 1;
+      if(paused == false){
+        fade++;
+      }
     }
     return true;
   }
@@ -257,8 +267,10 @@ class Animation{
         blocks[originX][originY] = -1;
         animationNotes[originX][originY] = "Idle";
       }
-      fallV += gravity/2;
-      fallY += fallV*scale;
+      if(paused == false){
+        fallV += gravity/2;
+        fallY += fallV*scale;
+      }
       image(blockImage,originX*csize+fallV/2,originY*csize+fallY-fallV,csize-fallV,csize+fallV);
       if(abs(cx - originX*csize)<csize){
         if( abs((originY*csize+fallY+csize)-cy)<csize/2 ){
@@ -290,7 +302,9 @@ class Animation{
         image(blockImage,originX*csize-oscillation/2,originY*csize-oscillation/2,csize+oscillation,csize+oscillation);
         //ellipse(originX*csize+csize/2,originY*csize+csize/2,csize/2,csize/2);
       }
-      fade++;
+      if(paused == false){
+        fade++;
+      }
     }
     return true;
   }
@@ -325,83 +339,85 @@ class Animation{
   boolean updateCannon(){
     
     if(onScreen(originX+shiftX/csize,originY+shiftY/csize)){
-      switch(dir){
-        case 0:
-          shiftY -= speed;
-          if(blockAt(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize))) > -1){
-              if(hasTag(blockAt(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize))),"Weak")){
-                blocks[round(originX+shiftX/float(csize))][floor(originY+shiftY/float(csize))] = -1;
-                return false;
-              } else if(hasTag(blockAt(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize))),"Bounce")){
-                dir = 1;
-                if(flipY){
-                  flipY = false;
-                } else {
-                  flipY = true;
+      if(paused == false){
+        switch(dir){
+          case 0:
+            shiftY -= speed;
+            if(blockAt(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize))) > -1){
+                if(hasTag(blockAt(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize))),"Weak")){
+                  blocks[round(originX+shiftX/float(csize))][floor(originY+shiftY/float(csize))] = -1;
+                  return false;
+                } else if(hasTag(blockAt(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize))),"Bounce")){
+                  dir = 1;
+                  if(flipY){
+                    flipY = false;
+                  } else {
+                    flipY = true;
+                  }
+                } else if(hasTag(blockAt(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize))),"Solid")){
+                  disturb(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize)),0,0);
+                  return false;
                 }
-              } else if(hasTag(blockAt(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize))),"Solid")){
-                disturb(round(originX+shiftX/float(csize)),floor(originY+shiftY/float(csize)),0,0);
-                return false;
-              }
-          }
-          break;
-        case 1:
-          shiftY += speed;
-          if(blockAt(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize))) > -1){
-              if(hasTag(blockAt(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize))),"Weak")){
-                blocks[round(originX+shiftX/float(csize))][ceil(originY+shiftY/float(csize))] = -1;
-                return false;
-              } else if(hasTag(blockAt(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize))),"Bounce")){
-                dir = 0;
-                if(flipY){
-                  flipY = false;
-                } else {
-                  flipY = true;
+            }
+            break;
+          case 1:
+            shiftY += speed;
+            if(blockAt(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize))) > -1){
+                if(hasTag(blockAt(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize))),"Weak")){
+                  blocks[round(originX+shiftX/float(csize))][ceil(originY+shiftY/float(csize))] = -1;
+                  return false;
+                } else if(hasTag(blockAt(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize))),"Bounce")){
+                  dir = 0;
+                  if(flipY){
+                    flipY = false;
+                  } else {
+                    flipY = true;
+                  }
+                } else if(hasTag(blockAt(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize))),"Solid")){
+                  disturb(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize)),0,0);
+                  return false;
                 }
-              } else if(hasTag(blockAt(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize))),"Solid")){
-                disturb(round(originX+shiftX/float(csize)),ceil(originY+shiftY/float(csize)),0,0);
-                return false;
-              }
-          }
-          break;
-        case 2:
-          shiftX -= speed;
-          if(blockAt(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))) > -1){
-              if(hasTag(blockAt(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Weak")){
-                blocks[floor(originX+shiftX/float(csize))][round(originY+shiftY/float(csize))] = -1;
-                return false;
-              } else if(hasTag(blockAt(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Bounce")){
-                dir = 3;
-                if(flipX){
-                  flipX = false;
-                } else {
-                  flipX = true;
+            }
+            break;
+          case 2:
+            shiftX -= speed;
+            if(blockAt(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))) > -1){
+                if(hasTag(blockAt(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Weak")){
+                  blocks[floor(originX+shiftX/float(csize))][round(originY+shiftY/float(csize))] = -1;
+                  return false;
+                } else if(hasTag(blockAt(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Bounce")){
+                  dir = 3;
+                  if(flipX){
+                    flipX = false;
+                  } else {
+                    flipX = true;
+                  }
+                } else if(hasTag(blockAt(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Solid")){
+                  disturb(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize)),0,0);
+                  return false;
                 }
-              } else if(hasTag(blockAt(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Solid")){
-                disturb(floor(originX+shiftX/float(csize)),round(originY+shiftY/float(csize)),0,0);
-                return false;
-              }
-          }
-          break;
-        case 3:
-          shiftX += speed;
-          if(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))) > -1){
-              if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Weak")){
-                blocks[ceil(originX+shiftX/float(csize))][round(originY+shiftY/float(csize))] = -1;
-                return false;
-              } else if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Bounce")){
-                dir = 2;
-                if(flipX){
-                  flipX = false;
-                } else {
-                  flipX = true;
+            }
+            break;
+          case 3:
+            shiftX += speed;
+            if(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))) > -1){
+                if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Weak")){
+                  blocks[ceil(originX+shiftX/float(csize))][round(originY+shiftY/float(csize))] = -1;
+                  return false;
+                } else if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Bounce")){
+                  dir = 2;
+                  if(flipX){
+                    flipX = false;
+                  } else {
+                    flipX = true;
+                  }
+                } else if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Solid")){
+                  disturb(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize)),0,0);
+                  return false;
                 }
-              } else if(hasTag(blockAt(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize))),"Solid")){
-                disturb(ceil(originX+shiftX/float(csize)),round(originY+shiftY/float(csize)),0,0);
-                return false;
-              }
-          }
-          break;
+            }
+            break;
+        }
       }
     } else {
       return false;

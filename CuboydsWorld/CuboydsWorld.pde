@@ -5,6 +5,11 @@
 //  return true;
 //}
 
+boolean paused = false;
+
+
+
+
 //Constant Variables
 int csize = 50; //Modifyable
 int ssize = csize * 20; //Modifyable
@@ -12,14 +17,20 @@ int ssize2 = csize * 15;
 float scale = ssize/float(1000);
 int bsize = csize;
 boolean facing = false;
+int world = 1;
 int level = 1;
-int room = 1;
 
 //Animation[] animation = new Animation[0];
 ArrayList<Animation> animations = new ArrayList<Animation>();
 
 float cspeed = 1/float(8);
 float squish = 0;
+boolean editor;
+boolean blockSelection;
+int selectedBlock;
+int selectedBlock2;
+
+
 
 String[] loadData;
 String[] splitData;
@@ -32,6 +43,7 @@ String[][] blockTags;
 
 //Varying Variables
 int[][] blocks;
+int[][] saveBlocks;
 String[][] animationNotes;
 
 //Cuboyd Posistion
@@ -76,17 +88,31 @@ void draw() {
   
   //updating the game world
   
+  if(mousePressed){
+    if(editor){
+      if(blockSelection == false){
+        if(mouseButton == LEFT){
+          setBlock(floor(mouseX/csize),floor(mouseY/csize),selectedBlock,true);
+        } else if(mouseButton == RIGHT){
+          setBlock(floor(mouseX/csize),floor(mouseY/csize),selectedBlock2,true);
+        }
+      }
+    }
+  }
+  
   if(lastUpdate != millis()/(1000/30) % 30){
     
     if(dead){
       reload();
     }
     
-    move();
-  
-    blockUpdates();
-    collisions();
-    touches();
+    if(paused == false){
+      move();
+    
+      blockUpdates();
+      collisions();
+      touches();
+    }
     
     //Cuboyd Modifications
 

@@ -1,11 +1,11 @@
 Format: Block_Editor_Tag,Block Name,Block_File_Name.png,Tag a,Tag b,Tag c,...
-Recognised Tags: Up,Down,Left,Right,*2,*1.5,*.5,Solid,Flow,Kill,Climb,Swim,Bounce,Crumble,Fall,Jet,CannonTrigger,Cannon,Muddy,NoJump,Invisible,Weak,End,LevelSpecific
+Recognised Tags: Up,Down,Left,Right,*2,*1.5,*.5,Solid,Flow,Kill,Climb,Swim,Bounce,Crumble,Fall,Jet,CannonTrigger,Cannon,Muddy,NoJump,Invisible,Weak,End,WorldSpecific
 Block render tags (Invisible) must be first if used: Modify some tags (Flow,Cannon,Jet) with modifiers (Fast,Medium,Slow,Up,Down,Left,Right)
-W,Wall,wall.png,LevelSpecific,Solid
+W,Wall,wall.png,WorldSpecific,Solid
 S,Spike,spike.png,Weak,Kill
-HM,Hard Mud,hardMud.png,Solid
+HM,Hard Mud,hardMud.png,Solid,Fall
 WS,Wall Spike,wallSpike.png,Weak,Kill
-L,Lava,lava.png,Kill,Flow,*.5,Weak
+L,Lava,lava.png,Kill,Flow,*.5,Weak,Right,Left,Down
 UP,Ladder,ladder.png,Weak,Climb
 H2,Water,water.png,Swim,Flow,*2,Weak,Right,Left,Down
 SL,Slime,slime.png,Bounce,Solid
@@ -20,7 +20,7 @@ CU,Cannon Up,cannonUp.png,Weak,Cannon,Up
 CD,Cannon Down,cannonDown.png,Weak,Cannon,Down
 CR,Cannon Right,cannonRight.png,Weak,Cannon,Right
 CL,Cannon Left,cannonLeft.png,Weak,Cannon,Left
-M,Mud,mud.png,Solid,Muddy,NoJump,Flow,*.5,*.5,*.5
+M,Mud,mud.png,Solid,Muddy,NoJump,Flow,*.5,*.5,*.5,Down,Right,Left
 IW,Invisible Wall,invisibleWall.png,Invisible,Solid
 IS,Invisible Spike,invisibleSpike.png,Invisible,Weak,Kill
 IX,Invisible Wall Spike,invisibleWallSpike.png,Invisible,Weak,Kill

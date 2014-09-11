@@ -8,8 +8,13 @@ boolean reload(){
   scale = ssize/float(1000);
   bsize = csize;
   facing = false;
+  world = 1;
   level = 1;
-  room = 1;
+  
+  blockSelection = false;
+  editor = true;
+  selectedBlock = 0;
+  selectedBlock2 = -1;
   
   //Animation[] animation = new Animation[0];
   animations = new ArrayList<Animation>();
@@ -20,6 +25,7 @@ boolean reload(){
   
   //Varying Variables
   blocks = new int[20][15];
+  saveBlocks = new int[20][15];
   animationNotes = new String[20][15];
   
   //Cuboyd Posistion
@@ -104,8 +110,8 @@ boolean loadBlocks(){
     blockDefs[i-3] = splitData[0];
     blockName[i-3] = splitData[1];
     blockFileName[i-3] = splitData[2];
-    if(hasTag(i-3,"LevelSpecific")){
-      blockImages[i-3] = loadImage("level"+level+"/blocks/"+splitData[2]);
+    if(hasTag(i-3,"WorldSpecific")){
+      blockImages[i-3] = loadImage("world"+world+"/blocks/"+splitData[2]);
     } else {
       blockImages[i-3] = loadImage("blocks/"+splitData[2]);
     }
@@ -121,19 +127,19 @@ boolean loadLevel(){
   //blockDefs[0] = "W";
   //blockDefs[1] = "D";
   
-  loadData = loadStrings("LEVEL_AND_ROOM.txt");
+  loadData = loadStrings("WORLD_AND_LEVEL.txt");
   splitData = split(loadData[0],',');
-  level = int(splitData[0]);
-  room = int(splitData[1]);
+  world = int(splitData[0]);
+  level = int(splitData[1]);
   
-  loadData = loadStrings("level"+level+"/room"+room+".txt");
+  loadData = loadStrings("world"+world+"/level"+level+".txt");
   
   String tempStr;
   blocks = new int[20][15];
   
   for (int i = 0; i < 15; i++) {
     
-    splitData = split(loadData[i],','); //KYLE! - THIS MEANS THAT THE ROOM FILE WAS NOT FOUND- CHECK THAT THE FILE "data/level#/room#.txt" EXISTS BASED ON WHAT YOU ENTERED IN "LEVEL_AND_ROOM.txt"! GOOD LUCK!
+    splitData = split(loadData[i],','); //KYLE! - THIS MEANS THAT THE LEVEL FILE WAS NOT FOUND- CHECK THAT THE FILE "data/world#/level#.txt" EXISTS BASED ON WHAT YOU ENTERED IN "WORLD_AND_LEVEL.txt"! GOOD LUCK!
     
     for (int j = 0; j < 20; j++) {
       
@@ -142,7 +148,7 @@ boolean loadLevel(){
         tempStr = tempStr.charAt(0)+"";
       }
       blocks[j][i] = index(tempStr);
-      
+      saveBlocks[j][i] = index(tempStr);
     }
   }
   
