@@ -1,2 +1,2 @@
-5,6
+1,4
 Make sure this file contains the level number then the room number on the first line seperated by commas!

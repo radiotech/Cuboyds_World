@@ -1,15 +1,15 @@
 W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,D 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,D 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
-W ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
+W ,  ,SL,  ,  ,  ,SL,  ,IW,L ,IW,IW,H2,H2,H2,IW,W ,W ,UP,D 
+W ,  ,SL,SL,  ,SL,SL,IW,L ,IW,L ,IW,IW,IW,H2,IW,W ,  ,UP,D 
+W ,  ,SL,  ,SL,  ,SL,IW,L ,L ,L ,IW,IW,H2,IW,IW,W ,W ,UP,W 
+W ,  ,SL,  ,  ,  ,SL,IW,L ,IW,L ,IW,H2,IW,IW,IW,W ,  ,UP,W 
+W ,  ,SL,  ,  ,  ,SL,IW,L ,IW,L ,IW,H2,H2,H2,IW,W ,W ,UP,W 
+W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,  ,W 
+W ,  ,  ,  ,IW,IW,IW,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,  ,W 
+W ,  ,  ,  ,  ,  ,IW,  ,  ,IW,  ,  ,  ,  ,  ,IW,  ,  ,IW,W 
+W ,IW,IW,IW,  ,IW,IW,IW,  ,  ,IW,  ,IW,  ,IW,IW,IW,  ,  ,W 
+W ,IW,IW,  ,  ,  ,  ,  ,  ,  ,  ,IW,IW,  ,  ,  ,IW,  ,  ,W 
+W ,  ,  ,  ,IW,IW,IW,IW,IW,  ,  ,  ,IW,  ,  ,  ,  ,  ,  ,W 
+W ,  ,IW,IW,IW,  ,  ,  ,  ,  ,IW,  ,IW,IW,  ,IW,  ,  ,  ,W 
+W ,  ,  ,  ,  ,  ,  ,IW,  ,  ,IW,  ,  ,  ,  ,IW,  ,IW,  ,W 
 W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W ,W 
